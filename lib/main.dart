@@ -27,6 +27,19 @@ class _HomeState extends State<Home> {
   int count = 0;
 
   @override
+  void initState() {
+    super.initState();
+
+    platform.setMethodCallHandler((methodCall) async {
+      if(methodCall.method == 'touch') {
+        setState(() {
+          count++;
+        });
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

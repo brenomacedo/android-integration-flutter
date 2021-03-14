@@ -27,6 +27,10 @@ public class MainActivity extends FlutterActivity {
                             .setDesktopShow(true)
                             .build();
 
+                        imageView.setOnClickListener(v -> {
+                            channel.invokeMethod("touch", null)
+                        });
+
                         break;
                     case "show":
                         FloatWindow.get().show();
@@ -34,8 +38,16 @@ public class MainActivity extends FlutterActivity {
                     case "hide":
                         FloatWindow.get().hide();
                         break;
+                    default:
+                        result.notImplemented();
                 }
             }
         );
+    }
+
+    @Override
+    protected void onDestroy() {
+        FloatWindow.destroy();
+        super.onDestroy();
     }
 }
